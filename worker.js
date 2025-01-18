@@ -1,7 +1,5 @@
 export default {
-    async fetch(request) {
-      const QWEN_BASE_URL = 'https://chat.qwenlm.ai';
-  
+    async fetch(request, env) {
       // 处理 OPTIONS 请求
       if (request.method === 'OPTIONS') {
         return new Response(null, {
@@ -16,7 +14,7 @@ export default {
   
       try {
         const url = new URL(request.url);
-        const targetUrl = QWEN_BASE_URL + url.pathname + url.search;
+        const targetUrl = env.QWEN_BASE_URL + url.pathname + url.search;
   
         // 创建新的请求头，保留原始认证信息
         const headers = new Headers({
@@ -44,7 +42,7 @@ export default {
                     const formData = new FormData();
                     formData.append('file', new Blob([binaryData]), 'image.png');
                     
-                    const uploadResponse = await fetch(`${QWEN_BASE_URL}/api/v1/files/`, {
+                    const uploadResponse = await fetch(`${env.QWEN_BASE_URL}/api/v1/files/`, {
                       method: 'POST',
                       headers: {
                         'Authorization': request.headers.get('Authorization') || ''

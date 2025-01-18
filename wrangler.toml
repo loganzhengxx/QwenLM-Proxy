@@ -1,0 +1,6 @@
+name = "qwenlm"
+main = "worker.js"
+compatibility_date = "2025-01-15"
+
+[vars]
+QWEN_BASE_URL = "https://chat.qwenlm.ai"
